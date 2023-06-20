@@ -1,9 +1,3 @@
-/*
- * File: 0-putchar.c
-* Auth:marvine
- *
- */
-
 #include "putchar..h"
 /**
  * main - Prints "putchar" followed by a new line.
