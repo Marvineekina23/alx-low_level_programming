@@ -1,16 +1,17 @@
-#include "main.h"
+#ifndef FILE_MAIN
+#define FILE_MAIN
 
-/**
-* main - tests function that prints if integer is positive or negative
-* Return: 0
-*/
+int _putchar(char c);
+int _isupper(int c);
+int _isdigit(int c);
+int mul(int a, int b);
+void print_numbers(void);
+void print_most_numbers(void);
+void more_numbers(void);
+void print_line(int n);
+void print_diagonal(int n);
+void print_square(int size);
+void print_triangle(int size);
+void print_number(int n);
 
-int main(void)
-{
-	int i;
-
-	i = 0;
-	positive_or_negative(i);
-
-	return (0);
-}
+#endif
