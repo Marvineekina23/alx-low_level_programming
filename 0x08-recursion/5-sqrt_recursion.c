@@ -1,34 +1,28 @@
 #include "main.h"
 /**
- * _strstr - finds the first occurrence of the substring needle in haystack
- * @haystack: string where to look
- * @needle: string to find
+ * sqrt2 - Makes possible to evaluate from 1 to n
+ * @a: same number as n
+ * @b: number that iterates from 1 to n
  *
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
-char *_strstr(char *haystack, char *needle)
+int sqrt2(int a, int b)
 {
-	int l, l2, i, j, c;
-
-	l = 0, l2 = 0, c = 0;
-	while (haystack[l] != '\0')
-		l++;
-	while (needle[l2] != '\0')
-		l2++;
-	for (i = 0; i < l; i++, haystack++)
-	{
-		for (j = 0, c = 0; j < l2; j++)
-		{
-			if (haystack[j] == 0)
-				break;
-			if (haystack[j] == needle[j])
-			{
-				c += 1;
-			}
-		}
-		if (c == l2)
-			return (haystack);
-	}
-	return (0);
+	if (b * b == a)
+		return (b);
+	else if (b * b > a)
+		return (-1);
+	return (sqrt2(a, b + 1));
+}
+/**
+ * _sqrt_recursion - returns the natural square root of n
+ * @n: Number Integer
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _sqrt_recursion(int n)
+{
+	return (sqrt2(n, 1));
 }
