@@ -1,38 +1,86 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 /**
- * print_tab - Prints an array of string
- * @tab: The array to print
+ * number - function to calculate number of words
+ * @str: string being passed to check for words
  *
- * Return: nothing
+ * Return: number of words
  */
-void print_tab(char **tab)
+int number(char *str)
 {
-    int i;
+	int a, num = 0;
 
-    for (i = 0; tab[i] != NULL; ++i)
-    {
-        printf("%s\n", tab[i]);
-    }
+	for (a = 0; str[a] != '\0'; a++)
+	{
+		if (*str == ' ')
+			str++;
+		else
+		{
+			for (; str[a] != ' ' && str[a] != '\0'; a++)
+				str++;
+			num++;
+		}
+	}
+	return (num);
+}
+/**
+ * free_everything - frees the memory
+ * @string: pointer values being passed for freeing
+ * @i: counter
+ */
+void free_everything(char **string, int i)
+{
+	for (; i > 0;)
+		free(string[--i]);
+	free(string);
 }
 
 /**
- * main - check the code for ALX School students.
- *
- * Return: 1 if an error occurred, 0 otherwise
+ * strtow - function that splits string into words
+ * @str: string being passed
+ * Return: null if string is empty or null or function fails
  */
-int main(void)
+char **strtow(char *str)
 {
-    char **tab;
+	int total_words = 0, b = 0, c = 0, length = 0;
+	char **words, *found_word;
 
-    tab = strtow("      ALX School         #cisfun      ");
-    if (tab == NULL)
-    {
-        printf("Failed\n");
-        return (1);
-    }
-    print_tab(tab);
-    return (0);
-    
+	if (str == 0 || *str == 0)
+		return (NULL);
+	total_words = number(str);
+	if (total_words == 0)
+		return (NULL);
+	words = malloc((total_words + 1) * sizeof(char *));
+	if (words == 0)
+		return (NULL);
+	for (; *str != '\0' &&  b < total_words;)
+	{
+		if (*str == ' ')
+			str++;
+		else
+		{
+			found_word = str;
+			for (; *str != ' ' && *str != '\0';)
+			{
+				length++;
+				str++;
+			}
+			words[b] = malloc((length + 1) * sizeof(char));
+			if (words[b] == 0)
+			{
+				free_everything(words, b);
+				return (NULL);
+			}
+			while (*found_word != ' ' && *found_word != '\0')
+			{
+				words[b][c] = *found_word;
+				found_word++;
+				c++;
+			}
+			words[b][c] = '\0';
+			b++; c = 0; length = 0; str++;
+		}
+	}
+	return (words);
+}
