@@ -1,30 +1,28 @@
-#include "variadic_functions.h"
+#include "function_pointers.h"
 #include <stdio.h>
-
+#include <stdlib.h>
 /**
- * print_strings - print a string followed by a newline
- * @separator: string to be printed between strings
- * @n: number of strings passed to function
+ * int_index - return index place if comparison = true, else -1
+ * @array: array
+ * @size: size of elements in array
+ * @cmp: pointer to func of one of the 3 in main
+ * Return: 0
  */
-
-void print_strings(const char *separator, const unsigned int n, ...)
+int int_index(int *array, int size, int (*cmp)(int))
 {
-	unsigned int i;
-	va_list list;
-	char *hold;
+	int i;
 
-	va_start(list, n);
-	for (i = 0; i < n; i++)
+	if (array == NULL)
+		return (-1);
+	if (size <= 0)
+		return (-1);
+	if (cmp == NULL)
+		return (-1);
+
+	for (i = 0; i < size; i++)
 	{
-		hold = va_arg(list, char*);
-		if (hold == NULL)
-			printf("(nil)");
-		else
-			printf("%s", hold);
-		if (i != (n - 1) && separator != NULL)
-			printf("%s", separator);
+		if (cmp(array[i]) != 0)
+			return (i);
 	}
-	printf("\n");
-
-	va_end(list);
+	return (-1);
 }
