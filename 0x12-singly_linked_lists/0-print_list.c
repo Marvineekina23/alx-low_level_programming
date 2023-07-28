@@ -1,8 +1,3 @@
-/*
- * File: 0-print_list.c
- * Auth: Brennan D Baraban
- */
-
 #include "lists.h"
 #include <stdio.h>
 
